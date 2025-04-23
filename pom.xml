@@ -67,6 +67,13 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- Azure SDK for Java -->
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-ai-inference</artifactId>
+			<version>1.0.0-beta.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
