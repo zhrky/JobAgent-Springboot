@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chat Application</title>
+</head>
+<body>
+    <h1>Chat with Bot</h1>
+    <form action="/chat" method="post">
+        <label for="message">Your Message:</label>
+        <input type="text" id="message" name="message" required>
+        <button type="submit">Send</button>
+    </form>
+    <div>
+        <h2>Response:</h2>
+        <p th:text="${response}">No response yet.</p>
+    </div>
+</body>
+</html>

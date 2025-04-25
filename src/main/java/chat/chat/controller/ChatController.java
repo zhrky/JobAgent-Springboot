@@ -1,14 +1,13 @@
 package chat.chat.controller;
 
 import chat.chat.service.ChatService;
-import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-// This is a Spring Boot REST controller that handles chat requests.
-// It uses the ChatService to interact with the DeepSeek API.
-
-@RestController
-@RequestMapping("/chat")
+@Controller
 public class ChatController {
 
     private final ChatService chatService;
@@ -17,9 +16,15 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    @PostMapping
-    public Mono<String> chatWithBot(@RequestBody String message) {
-        return chatService.askDeepSeek(message);
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @PostMapping("/chat")
+    public String chatWithBot(@RequestParam String message, Model model) {
+        String response = chatService.askDeepSeek(message).block();
+        model.addAttribute("response", response);
+        return "index";
     }
 }
-
