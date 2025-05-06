@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JobAgents - AI Asistan</title>
+    <title>JobAgents - İş İlanları</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
@@ -16,21 +16,15 @@
             background: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
-        .chat-container {
-            max-width: 800px;
+        .job-list {
+            max-width: 1000px;
             margin: 2rem auto;
-            background: #ffffff;
+        }
+        .card {
+            border: none;
             border-radius: 15px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
-        .chat-box {
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            height: 400px;
-            overflow-y: auto;
-            padding: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         .btn-primary {
             background: linear-gradient(90deg, #3b82f6, #1e40af);
@@ -55,10 +49,10 @@
                         <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/jobs">İş İlanları</a>
+                        <a class="nav-link active" href="/jobs">İş İlanları</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/chat">AI Asistan</a>
+                        <a class="nav-link" href="/chat">AI Asistan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">Profil</a>
@@ -71,18 +65,22 @@
         </div>
     </nav>
 
-    <div class="chat-container">
-        <h1 class="text-center mb-4">AI Asistan ile Sohbet</h1>
-        <div class="chat-box">
-            <p class="text-muted">Mesajlar burada görünecek...</p>
-            <!-- TODO: Add dynamic chat messages -->
-        </div>
-        <form>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Sorunuzu yazın..." aria-label="Mesaj">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Gönder</button>
-            </div>
+    <div class="job-list">
+        <h1 class="text-center mb-4">İş İlanları</h1>
+        <form th:action="@{/jobs/search}" method="get" class="input-group mb-4">
+            <input type="text" name="query" class="form-control" th:value="${query}" placeholder="Pozisyon veya açıklama ara..." aria-label="İş ara">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Ara</button>
         </form>
+        <div th:each="job : ${jobs}" class="card">
+            <div class="card-body">
+                <h5 th:text="${job.title}" class="card-title"></h5>
+                <p th:text="${job.description}" class="card-text text-muted"></p>
+                <a th:href="${job.link}" class="btn btn-primary">Detaylar</a>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(jobs)}" class="alert alert-info text-center">
+            <p>Aramanıza uygun iş ilanı bulunamadı.</p>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -11,8 +11,6 @@ public class Job {
         this.link = link;
     }
 
-    // Getters and Setters
-
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public String getLink() { return link; }
