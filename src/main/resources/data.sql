@@ -1,0 +1,1 @@
+INSERT INTO user (email, password) VALUES ('zkaya245@gmail.com', '$2a$10$DOWJ9e1Q9Wz3x9z9z9z9zO9z9z9z9z9z9z9z9z9z9z9z9z9z9z9z9z9z9z9z9'); -- Şifre: "123456"

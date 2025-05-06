@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- CSS dosyanızı buraya ekleyin -->
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        
+        <!-- Tercih Formu -->
+        <div class="form-section">
+            <h2>Tercih Formu</h2>
+            <form th:action="@{/dashboard}" method="post">
+                <label for="position">Pozisyon (Title):</label>
+                <input type="text" id="position" name="position" required>
+
+                <label for="location">Lokasyon:</label>
+                <input type="text" id="location" name="location" required>
+
+                <label for="workType">Uzaktan / Hibrit tercihi:</label>
+                <select id="workType" name="workType">
+                    <option value="remote">Uzaktan</option>
+                    <option value="hybrid">Hibrit</option>
+                </select>
+
+                <button type="submit">Gönder</button>
+            </form>
+        </div>
+
+        <!-- AI Chatbot’a Sor -->
+        <div class="chatbot-section">
+            <h2>AI Chatbot’a Sor</h2>
+            <form th:action="@{/ask-chatbot}" method="post">
+                <label for="question">Sorunuzu yazın:</label>
+                <textarea id="question" name="question" required></textarea>
+                <button type="submit">Sor</button>
+            </form>
+        </div>
+
+        <!-- CV Yükle -->
+        <div class="cv-upload">
+            <h2>CV Yükle</h2>
+            <form action="/upload-cv" method="post" enctype="multipart/form-data">
+                <input type="file" name="cvFile" accept=".pdf,.docx,.txt" required>
+                <button type="submit">Yükle</button>
+            </form>
+        </div>
+
+        <!-- En Son Başvurulan İlanlar -->
+        <div class="recent-applications">
+            <h2>En Son Başvurulan İlanlar</h2>
+            <ul>
+                <li th:each="job : ${recentJobs}">
+                    <p th:text="${job.title}"></p>
+                    <p th:text="${job.location}"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
