@@ -24,13 +24,13 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/signup", "/login", "/dashboard", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/chat", "/dashboard", "/login", "/signup").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/dashboard")
-                .failureUrl("/login?error=true")
+                .failureUrl("/login?error")
                 .permitAll()
             )
             .logout(logout -> logout
