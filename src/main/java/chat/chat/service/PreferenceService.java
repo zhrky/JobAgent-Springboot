@@ -5,6 +5,7 @@ import chat.chat.repository.PreferenceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class PreferenceService {
@@ -29,5 +30,9 @@ public class PreferenceService {
 
     public Optional<Preference> getPreferenceByUserId(String userId) {
         return preferenceRepository.findByUserId(userId);
+    }
+
+    public List<Preference> getPreferencesByUserId(String userId) {
+        return preferenceRepository.findAllByUserId(userId);
     }
 }

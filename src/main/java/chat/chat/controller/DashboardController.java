@@ -1,6 +1,4 @@
 package chat.chat.controller;
-
-import chat.chat.model.Job;
 import chat.chat.model.Preference;
 import chat.chat.service.PreferenceService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class DashboardController {
@@ -27,27 +24,17 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String showDashboard(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        // Load recent jobs
-        List<Job> recentJobs = new ArrayList<>();
-        recentJobs.add(new Job("Frontend Developer", "Modern web uygulamaları geliştirme", "https://linkedin.com/job1"));
-        recentJobs.add(new Job("Backend Java Developer", "Java ile backend sistemler geliştirme", "https://linkedin.com/job2"));
-        model.addAttribute("recentJobs", recentJobs);
-
-        // Load user preferences if authenticated
-        Preference preference = new Preference();
         if (userDetails != null) {
-            try {
-                String userId = userDetails.getUsername();
-                Optional<Preference> savedPreference = preferenceService.getPreferenceByUserId(userId);
-                preference = savedPreference.orElse(new Preference());
-            } catch (Exception e) {
-                model.addAttribute("error", "Tercihler yüklenirken bir hata oluştu: " + e.getMessage());
-            }
+            String userId = userDetails.getUsername();
+            List<Preference> preferences = preferenceService.getPreferencesByUserId(userId);
+            model.addAttribute("preferences", preferences);
+        } else {
+            model.addAttribute("preferences", new ArrayList<>());
         }
-
-        // Always add preference to model
-        model.addAttribute("preference", preference);
-
+    
+        // Yeni bir Preference nesnesi ekleyin
+        model.addAttribute("preference", new Preference());
+    
         return "dashboard";
     }
 

@@ -59,9 +59,18 @@
         <h1 class="text-center mb-4">Profil</h1>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Kullanıcı Adı</h5>
-                <p class="card-text" th:text="${username}"></p>
-                <!-- TODO: Add more profile details (e.g., email, preferences) -->
+    
+                <h5 class="card-title mt-4">E-posta</h5>
+                <p class="card-text" th:text="${email}"></p>
+    
+                <h5 class="card-title mt-4">Kaydedilmiş Tercihler</h5>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="preference : ${preferences}">
+                        <strong>Pozisyon:</strong> <span th:text="${preference.position}"></span><br>
+                        <strong>Lokasyon:</strong> <span th:text="${preference.location}"></span><br>
+                        <strong>Çalışma Türü:</strong> <span th:text="${preference.workType}"></span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

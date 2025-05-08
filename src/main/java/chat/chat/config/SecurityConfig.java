@@ -42,20 +42,20 @@ public class SecurityConfig {
         return provider;
     }
 
-    @Bean
+        @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/signup").permitAll()
-                .requestMatchers("/dashboard", "/chat", "/jobs", "/jobs/search", "/profile", "/upload-cv").authenticated()
-                .anyRequest()
+                .requestMatchers("/login", "/signup", "/dashboard").permitAll() // Allow public access to /dashboard
+                .requestMatchers("/chat", "/jobs", "/jobs/search", "/profile", "/upload-cv").authenticated()
+                .anyRequest().authenticated() // All other requests require authentication
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .usernameParameter("email") // Match login form's email field
+                .usernameParameter("email")
                 .defaultSuccessUrl("/dashboard")
-                .failureUrl("/dashboard")
+                .failureUrl("/login?error")
                 .permitAll()
             )
             .logout(logout -> logout

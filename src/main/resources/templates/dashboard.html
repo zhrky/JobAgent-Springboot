@@ -190,6 +190,14 @@
                     </li>
                 </ul>
             </div>
+            <div class="dropdown ms-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-globe"></i> Dil
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <li><a href="?lang=tr" th:text="'🇹🇷 ' + #{language.turkish}">🇹🇷 Türkçe</a></li>
+                    <li><a href="?lang=en" th:text="'🇬🇧 ' + #{language.english}">🇬🇧 English</a></li>s
+                </ul>
         </div>
     </nav>
 
@@ -297,7 +305,7 @@
     <!-- Footer -->
     <footer class="bg-white py-4 mt-5">
         <div class="container text-center">
-            <p class="text-muted mb-0">© 2025 JobAgents. Tüm hakları saklıdır. | <a href="/terms" class="text-primary">Kullanım Şartları</a> | <a href="/privacy" class="text-primary">Gizlilik Politikası</a></p>
+            <p class="text-muted mb-0">© 2025 JobAgents. Tüm hakları saklıdır.</p>
         </div>
     </footer>
 

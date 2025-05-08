@@ -18,7 +18,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList(); // Roller varsa burada tanımlanabilir
+        return Collections.emptyList(); 
     }
 
     @Override
@@ -28,8 +28,10 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail(); // Giriş için e-posta kullanılıyor
+
+        return user.getFirstName() + " " + user.getLastName();
     }
+    
 
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }
